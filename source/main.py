@@ -27,9 +27,8 @@ import picamera
 import os
 
 stop = threading.Event()
-signal = True
-tMain = Timer.Timer( 145, 145, True )
-t = Timer.Timer( 30, 30, signal )
+tMain = Timer.Timer( 145, 145, stop )
+t = Timer.Timer( 30, 30, stop )
 sensorPin = 7
 spotlightPin = 38
 loopCount = 0

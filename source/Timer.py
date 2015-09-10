@@ -19,11 +19,11 @@ import threading
 import time
 
 class Timer( threading.Thread ):
-  def __init__( self, count, orgCount, signal ):
+  def __init__( self, count, orgCount, stop ):
     threading.Thread.__init__( self )
     self.count = count
     self.orgCount = orgCount
-    self.signal = signal
+    self.stop = stop
 
   def reset( self ):
     self.count = self.orgCount
@@ -32,7 +32,7 @@ class Timer( threading.Thread ):
   def run( self ):
     print( "Starting Timer:" )
     while not self.count == 0:
-      if not stop.isSet():
+      if not self.stop.isSet():
         self.count -= 1
         time.sleep( 1.000 )
         print( "Timer @ " + str( self.count ) )
