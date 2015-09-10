@@ -15,6 +15,8 @@ This file is part of PiAlarms.
     along with PiAlarms.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import threading
+import time
 
 class Timer( threading.Thread ):
   def __init__( self, count, orgCount, signal ):
