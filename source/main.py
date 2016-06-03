@@ -92,6 +92,7 @@ try:
       t.reset()
       print( "-- TRIGGERED: Taking picture..." )
       GPIO.output( spotlightPin, GPIO.HIGH )
+      storeTo = name( files, fileName )
       cam.capture( name( files, fileName ) )
       GPIO.output( spotlightPin, GPIO.LOW )
       print( "-- TRIGGERED: Sending SMS..." )
