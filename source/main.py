@@ -22,17 +22,23 @@
 
 import threading
 import Timer
+import Mail
 import RPi.GPIO as GPIO
 import picamera
 import os
 
+m = Mail.Email()
+m.setLoginData( "rec", "ema", "psw" )
+
 stop = threading.Event()
 tMain = Timer.Timer( 145, 145, stop )
 t = Timer.Timer( 30, 30, stop )
+
 sensorPin = 7
 spotlightPin = 38
 loopCount = 0
 pictureCount = 0
+
 fileName = "/home/pi/PiCamera/Fotos/SILENT%i.jpg"
 smsFile = "/home/pi/message.txt"
 
@@ -76,6 +82,10 @@ def sendSMS():
   os.system( "cp /home/pi/message.txt /var/spool/sms/outgoing" )
   print( "Copied File" )
 
+def sendMail( m, filename ):
+  m.setFilename( filename )
+  m.send()
+
 #--------------------------------
 #--------------------------------
 
@@ -96,7 +106,7 @@ try:
       cam.capture( name( files, fileName ) )
       GPIO.output( spotlightPin, GPIO.LOW )
       print( "-- TRIGGERED: Sending SMS..." )
-      sendSMS()
+      sendMail()
       pictureCount += 1 
       waitForSensor()
     else:
