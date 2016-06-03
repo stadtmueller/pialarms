@@ -6,23 +6,23 @@ import os
 import sys
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
-from email.MIMEBASE import MIMEBase
+from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
 from email.Utils import formatdate
 from email import Encoders
 
 class Email( object ):
-    self.recipient = ""
-    self.smtpserver = "smtp.googlemail.com"
-    self.username = ""
-    self.password = ""
-    self.filename = ""
+    recipient = ""
+    smtpserver = "smtp.googlemail.com"
+    username = ""
+    password = ""
+    filename = ""
 
     def send( self ):
         mail = MIMEMultipart()
         mail[ "From"    ] = "pialarms"
         mail[ "To"      ] = self.recipient
-        mail[ "Date"    ] = formadate( localtime=True )
+        mail[ "Date"    ] = formatdate( localtime=True )
         mail[ "Subject" ] = "Movement detected"
 
         mail.attach( MIMEText( "" ) )
@@ -42,10 +42,13 @@ class Email( object ):
         server.sendmail( "pialarms", self.recipient, mail.as_string() )
         server.quit()
 
-    def setFile( filename ):
-        self.filename = filename
+    def setFile( self, filename ):
+        if os.path.isfile( filename ):
+            self.filename = filename
+        else:
+            print( filename + " is not a valid file. Choose a different." )
 
-    def setLoginData( recepient, username, password ):
+    def setLoginData( self, recipient, username, password ):
         self.recipient = recipient
         self.username = username
         self.password = password
