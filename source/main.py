@@ -28,6 +28,7 @@ import picamera
 import os
 
 m = Mail.Email()
+# Conifgure this line with receiever address, email login name and password
 m.setLoginData( "rec", "ema", "psw" )
 
 stop = threading.Event()
@@ -74,8 +75,7 @@ def cleanAndExit():
   GPIO.cleanup()
   cam.close()
   stop.set()
-  print( "shutdown" )
-  #os.system( "sudo shutdown -h now" )
+  os.system( "sudo shutdown -h now" )
 
 # Moving message.txt to /var/spool for sms-script
 def sendSMS():
