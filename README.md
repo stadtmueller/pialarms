@@ -1,2 +1,2 @@
 # pialarms
-Turn your raspberry pi into a alarm-system with sms messenger( UMTS-stick required ) and camera( picamera and IR-LEDs required )
+Software for raspberry pi based alarm-system with sms messenger (UMTS stick) and camera (picamera and IR-LEDs spotlight)
